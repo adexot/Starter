@@ -83,6 +83,8 @@ public class TextFragment extends Fragment {
             Snackbar.make(storyTextView, "picture successfully uploaded..\n Thanks for blowing the whistle", Snackbar.LENGTH_LONG)
                     .setAction("Ok", null)
                     .show();
+
+
         }
     };
 
