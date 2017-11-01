@@ -1,6 +1,7 @@
 package com.oadex.starter.model;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,8 @@ public class StarterAdapter extends RecyclerView.Adapter<StarterAdapter.StarterV
 
         Starter starter = items.get(position);
         holder.titleTextView.setText(starter.getTitle());
-        holder.descriptionTextView.setText(starter.getDescription());
+//        holder.descriptionTextView.setText(starter.getDescription());
+        Log.i("PIC_DATA", "" +starter.getPicture());
         holder.imageView.setImageBitmap(Util.decodePicture(starter.getPicture()));
     }
 
@@ -49,7 +51,7 @@ public class StarterAdapter extends RecyclerView.Adapter<StarterAdapter.StarterV
     {
         public ImageView imageView;
         public TextView titleTextView;
-        public TextView descriptionTextView;
+//        public TextView descriptionTextView;
 
         public StarterViewHolder(View itemView)
         {
@@ -57,7 +59,7 @@ public class StarterAdapter extends RecyclerView.Adapter<StarterAdapter.StarterV
 
             imageView = itemView.findViewById(R.id.imageView);
             titleTextView = itemView.findViewById(R.id.titleView);
-            descriptionTextView = itemView.findViewById(R.id.descriptionView);
+//            descriptionTextView = itemView.findViewById(R.id.descriptionView);
         }
     }
 }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,8 @@ public class FragmentThree extends Fragment
         super.onCreate(savedInstanceState);
         database = new DataBaseHelper(getContext());
         list = database.getAll();
-        adapter = new StarterAdapter(list);
+        Log.i("DATA", "" +list.size());
+
     }
 
     @Override
@@ -46,11 +48,11 @@ public class FragmentThree extends Fragment
                              Bundle savedInstanceState) {
 
         View rootView =  inflater.inflate(R.layout.fragment_three, container, false);
-        recyclerView = rootView.findViewById(R.id.recyclerView);
+        recyclerView = rootView.findViewById(R.id.listRecyclerView);
 
         RecyclerView.LayoutManager layout = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layout);
-
+        adapter = new StarterAdapter(list);
         recyclerView.setAdapter(adapter);
 
         return rootView;

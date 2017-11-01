@@ -89,6 +89,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
             do
                 {
                 Starter starter = new Starter(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5));
+                    Log.i("DATA", "hello" + starter.getPicture());
                 list.add(starter);
 
             }

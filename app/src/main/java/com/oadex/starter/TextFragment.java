@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,8 +90,9 @@ public class TextFragment extends Fragment {
             String title1 = title.getText().toString();
             String description1 = description.getText().toString();
             String picture = Util.encodePicture(bitmap);
-            Starter item = new Starter(title1, description1, "", "", video);
+            Starter item = new Starter(title1, description1, "", picture, video);
             DataBaseHelper helper = new DataBaseHelper(getContext());
+            Log.i("DATA", "" +picture);
             helper.insert(item);
             helper.close();
             Snackbar.make(description, "picture successfully uploaded", Snackbar.LENGTH_LONG)
