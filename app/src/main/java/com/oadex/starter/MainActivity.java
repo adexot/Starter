@@ -9,7 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements FragmentTwo.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity
+        implements FragmentTwo.OnFragmentInteractionListener, FragmentOne.OnFragmentInteractionListener
+{
 
     private TextView mTextMessage;
 
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements FragmentTwo.OnFra
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_layout, FragmentTwo.newInstance());
+        transaction.replace(R.id.frame_layout, FragmentOne.newInstance());
         transaction.commit();
     }
 
@@ -64,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements FragmentTwo.OnFra
 
     @Override
     public void addCaption(Fragment fragment, Bundle bundle) {
+        fragment.setArguments(bundle);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_layout, fragment);
         transaction.commit();

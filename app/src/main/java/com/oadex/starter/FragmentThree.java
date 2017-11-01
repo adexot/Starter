@@ -59,7 +59,7 @@ public class FragmentThree extends Fragment {
 //        TextView textView = new TextView(getActivity());
 //        textView.setText(R.string.hello_blank_fragment);
 //        return textView;
-        return inflater.inflate(R.layout.text_fragment, container, false);
+        return inflater.inflate(R.layout.fragment_three, container, false);
     }
 
 }

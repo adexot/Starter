@@ -22,6 +22,7 @@ public class FragmentTwo extends Fragment {
 
     private ImageView imageView;
     private Button cameraButton;
+    private Bitmap bitmap;
 
     private OnFragmentInteractionListener mListener;
 
@@ -71,6 +72,7 @@ public class FragmentTwo extends Fragment {
         if(resultCode == RESULT_OK && requestCode == REQUEST_CODE)
         {
             Bitmap bitmap = (Bitmap)data.getExtras().get("data");
+            this.bitmap = bitmap;
             imageView.setImageBitmap(bitmap);
             cameraButton.setText("Next");
             cameraButton.setOnClickListener(addCaptionListener);
@@ -95,7 +97,9 @@ public class FragmentTwo extends Fragment {
     public View.OnClickListener addCaptionListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            mListener.addCaption(TextFragment.newInstance(null), null);
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("picture", bitmap);
+            mListener.addCaption(TextFragment.newInstance(), bundle);
         }
     };
 

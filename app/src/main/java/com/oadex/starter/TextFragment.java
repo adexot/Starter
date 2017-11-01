@@ -2,6 +2,7 @@ package com.oadex.starter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -15,10 +16,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.oadex.starter.model.DataBaseHelper;
+import com.oadex.starter.model.Starter;
+import com.oadex.starter.model.Util;
+
 public class TextFragment extends Fragment {
     private Button uploadButton;
-    private TextView storyTextView;
-    private TextView cameraTextView;
+    private TextView title;
+    private TextView description;
 
     private OnFragmentInteractionListener mListener;
 
@@ -27,10 +32,8 @@ public class TextFragment extends Fragment {
     }
 
 
-    public static TextFragment newInstance(Bundle bundle) {
+    public static TextFragment newInstance() {
         TextFragment fragment = new TextFragment();
-        Bundle args = bundle;
-        fragment.setArguments(args);
         return fragment;
     }
 
@@ -60,9 +63,9 @@ public class TextFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
         uploadButton = view.findViewById(R.id.upload);
-        storyTextView = view.findViewById(R.id.caption_text);
-        cameraTextView = view.findViewById(R.id.camera_text);
-        cameraTextView.requestFocus();
+        title = view.findViewById(R.id.title);
+        description = view.findViewById(R.id.description);
+        title.requestFocus();
         uploadButton.setOnClickListener(uploadListerner);
     }
 
@@ -80,11 +83,19 @@ public class TextFragment extends Fragment {
     public View.OnClickListener uploadListerner = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Snackbar.make(storyTextView, "picture successfully uploaded..\n Thanks for blowing the whistle", Snackbar.LENGTH_LONG)
+
+            Bitmap bitmap = getArguments().getParcelable("picture");
+            String video = null;
+            String title1 = title.getText().toString();
+            String description1 = description.getText().toString();
+            String picture = Util.encodePicture(bitmap);
+            Starter item = new Starter(title1, description1, "", "", video);
+            DataBaseHelper helper = new DataBaseHelper(getContext());
+            helper.insert(item);
+            helper.close();
+            Snackbar.make(description, "picture successfully uploaded", Snackbar.LENGTH_LONG)
                     .setAction("Ok", null)
                     .show();
-
-
         }
     };
 

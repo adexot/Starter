@@ -37,7 +37,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        db.execSQL("CREATE TABLE " + tableName + " (" + requestCode + " INTEGER PRIMARY KEY AUTOINCREMENT, " + title + " TEXT, " + description + " TEXT, " + time + " TEXT, "+ picture + " BLOB, " + time + " TEXT, " + video + " BLOB )");
+        db.execSQL("CREATE TABLE " + tableName + " (" + requestCode + " INTEGER PRIMARY KEY AUTOINCREMENT, " + title + " TEXT, " + description + " TEXT, " + time + " TEXT, "+ picture + " BLOB, " + video + " BLOB )");
         Log.i("DataBaseHelper", "on create database");
     }
 
@@ -50,7 +50,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
     }
 
 
-    public void insert(Starter starter)
+    public boolean insert(Starter starter)
     {
         ContentValues contentValues = new ContentValues();
         contentValues.put(DataBaseHelper.title, starter.getTitle());
@@ -62,8 +62,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
         getWritableDatabase().insert(tableName,null,contentValues);
 
         Log.i("DataBaseHelper", "inserting into database");
-
-
+        return true;
     }
 
     public void update(String courseCode, String courseTitle,String venue, String day, String time,String alert,String updatedDay)
